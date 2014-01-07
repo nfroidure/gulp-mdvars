@@ -1,68 +1,41 @@
-# gulp-iconfont [![NPM version](https://badge.fury.io/js/gulp-iconfont.png)](https://npmjs.org/package/gulp-iconfont) [![Build status](https://api.travis-ci.org/nfroidure/gulp-iconfont.png)](https://travis-ci.org/nfroidure/gulp-iconfont)
-> Create a SVG/TTF/EOT/WOFF fonts from several SVG icons with [Gulp](http://gulpjs.com/).
-
-You can test this library with the
- [frontend generator](http://nfroidure.github.io/svgiconfont/) before using
- her.
+# gulp-mdvars [![NPM version](https://badge.fury.io/js/gulp-mdvars.png)](https://npmjs.org/package/gulp-mdvars) [![Build status](https://api.travis-ci.org/nfroidure/gulp-mdvars.png)](https://travis-ci.org/nfroidure/gulp-mdvars)
+> Parse VarStream metadatas in a markdown file and reemit the cleaned up
+ markdown content with [Gulp](http://gulpjs.com/).
 
 ## Usage
 
-First, install `gulp-iconfont` as a development dependency:
+First, install `gulp-mdvars` as a development dependency:
 
 ```shell
-npm install --save-dev gulp-iconfont
+npm install --save-dev gulp-mdvars
 ```
 
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-var iconfont = require('gulp-iconfont');
+var mdvars = require('gulp-mdvars');
+var marked = require('gulp-marked');
 
-gulp.task('Iconfont', function(){
-  gulp.src(['assets/icons/*.svg'])
-    .pipe(iconfont({
-      fontName: 'myfont', // required
-      appendCodepoints: true // recommanded option
+gulp.task('mdvars', function() {
+  gulp.src(['assets/contents/*.md'])
+    .pipe(mdvars({
+      prop: 'metas', // Datas will be set to the file object in the given property
      }))
-    .pipe(gulp.dest('www/fonts/'));
+    .pipe(marked()) // Do whatever you want with the cleaned up datas
+    .pipe(gulp.dest('www/'));
 });
 ```
 
-`gulp-iconfont` bundles several plugins to bring a simpler API
- (`gulp-svgicons2svgfont`, `gulp-svg2tff`, `gulp-ttf2eot`, `gulp-ttf2woff`).
+`gulp-mdvars` is build on top of [mdvars](https://github.com/nfroidure/mdvars)
+ and [varstream](https://github.com/nfroidure/VarStream) NPM modules. Please
+ report specific issues in the corresponding repository.
 
 ## API
 
-### iconfont(options)
+### mdvars(options)
 
-#### options.fontName
+#### options.prop
 Type: `String`
-Default value: `'iconfont'`
+Default value: `'metas'`
 
-A string value that is used to name your font-family (required).
-
-#### options.fixedWidth
-Type: `Boolean`
-Default value: `false`
-
-Creates a monospace font of the width of the largest input icon.
-
-#### options.fontHeight
-Type: `Number`
-
-The ouputted font height (defaults to the height of the highest input icon).
-
-#### options.descent
-Type: `Number`
-Default value: `0`
-
-The font descent. It is usefull to fix the font baseline yourself.
-
-The ascent formula is : ascent = fontHeight - descent.
-
-#### options.appendCodepoints
-Type: `Boolean`
-Default value: `false`
-
-Allow to append codepoints to icon files in order to always keep the same
- codepoints.
+A string value indicating in wich property metadatas must be filled.

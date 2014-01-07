@@ -1,8 +1,8 @@
 {
   "name": "gulp-mdvars",
   "version": "0.0.1",
-  "description": "Extract VarStream meta datas from markdown files.",
-  "main": "index.js",
+  "description": "Extract VarStream metadatas from markdown files.",
+  "main": "src/index.js",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha tests/*.mocha.js"
   },
@@ -13,8 +13,24 @@
     "varstream",
     "metadata"
   ],
-  "author": "Nicolas Froidure",
-  "license": "MIT",
+  "homepage": "https://github.com/nfroidure/gulp-mdvars",
+  "author": {
+    "name": "Nicolas Froidure",
+    "url": "http://www.insertafter.com/blog.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nfroidure/gulp-mdvars.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nfroidure/gulp-mdvars/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/nfroidure/gulp-mdvars/blob/master/LICENSE"
+    }
+  ],
   "dependencies": {
     "gulp-util": "~2.2.0",
     "grunt": "~0.4.2",
