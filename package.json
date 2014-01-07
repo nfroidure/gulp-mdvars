@@ -1,0 +1,28 @@
+{
+  "name": "gulp-mdvars",
+  "version": "0.0.1",
+  "description": "Extract VarStream meta datas from markdown files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha tests/*.mocha.js"
+  },
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "markdown",
+    "varstream",
+    "metadata"
+  ],
+  "author": "Nicolas Froidure",
+  "license": "MIT",
+  "dependencies": {
+    "gulp-util": "~2.2.0",
+    "grunt": "~0.4.2",
+    "mdvars": "0.0.1"
+  },
+  "devDependencies": {
+    "event-stream": "~3.0.20",
+    "mocha": "~1.16.2",
+    "gulp": "~3.2.4"
+  }
+}
