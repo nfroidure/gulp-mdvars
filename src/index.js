@@ -14,7 +14,11 @@ function gulpMdvars(options) {
   options.prop = options.prop || 'metas';
 
   stream._transform = function(file, unsed, done) {
-    if(file.isNull()) return; // Do nothing
+    // When null just pass through
+    if(file.isNull()) {
+      stream.push(file); done();
+      return;
+    }
 
     var contents = file.pipe(new mdvars(file, options.prop));
 
