@@ -26,13 +26,13 @@ function gulpMdvars(options) {
     if(file.isBuffer()) {
       file.contents = new Buffer('');
 
-      contents.on('data', function(chunk) {
-        file.contents = Buffer.concat([file.contents, chunk]);
-      });
-      
       contents.once('end', function() {
         stream.push(file);
         done();
+      });
+
+      contents.on('data', function(chunk) {
+        file.contents = Buffer.concat([file.contents, chunk]);
       });
 
     // Streams
