@@ -33,7 +33,6 @@
   ],
   "dependencies": {
     "gulp-util": "~2.2.0",
-    "grunt": "~0.4.2",
     "mdvars": "0.0.1"
   },
   "devDependencies": {
