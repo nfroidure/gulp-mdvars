@@ -1,6 +1,8 @@
-# gulp-mdvars [![NPM version](https://badge.fury.io/js/gulp-mdvars.png)](https://npmjs.org/package/gulp-mdvars) [![Build status](https://api.travis-ci.org/nfroidure/gulp-mdvars.png)](https://travis-ci.org/nfroidure/gulp-mdvars)
+# gulp-mdvars
 > Parse VarStream metadatas in a markdown file and reemit the cleaned up
  markdown content with [Gulp](http://gulpjs.com/).
+
+[![NPM version](https://badge.fury.io/js/gulp-mdvars.png)](https://npmjs.org/package/gulp-mdvars) [![Build status](https://secure.travis-ci.org/nfroidure/gulp-mdvars.png)](https://travis-ci.org/nfroidure/gulp-mdvars) [![Dependency Status](https://david-dm.org/nfroidure/gulp-mdvars.png)](https://david-dm.org/nfroidure/gulp-mdvars) [![devDependency Status](https://david-dm.org/nfroidure/gulp-mdvars/dev-status.png)](https://david-dm.org/nfroidure/gulp-mdvars#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/nfroidure/gulp-mdvars/badge.png?branch=master)](https://coveralls.io/r/nfroidure/gulp-mdvars?branch=master)
 
 ## Usage
 
