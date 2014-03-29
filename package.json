@@ -1,6 +1,6 @@
 {
   "name": "gulp-mdvars",
-  "version": "0.0.333",
+  "version": "0.0.3",
   "description": "Extract VarStream metadatas from markdown files.",
   "main": "src/index.js",
   "scripts": {
