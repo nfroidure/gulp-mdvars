@@ -35,17 +35,17 @@
   ],
   "dependencies": {
     "gulp-util": "~2.2.0",
-    "mdvars": "0.0.1",
+    "mdvars": "0.0.2",
     "readable-stream": "^1.0.26-2"
   },
   "devDependencies": {
-    "event-stream": "~3.1.0",
-    "mocha": "~1.17.1",
-    "gulp": "~3.5.2",
+    "event-stream": "~3.1.1",
+    "mocha": "~1.18.2",
+    "gulp": "~3.6.0",
     "mocha-lcov-reporter": "0.0.1",
-    "coveralls": "~2.7.1",
-    "istanbul": "~0.2.4",
-    "mdvars": "0.0.1",
+    "coveralls": "~2.10.0",
+    "istanbul": "~0.2.6",
+    "mdvars": "0.0.2",
     "gulp-util": "~2.2.14"
   }
 }
