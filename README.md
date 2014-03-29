@@ -41,3 +41,8 @@ Type: `String`
 Default value: `'metas'`
 
 A string value indicating in wich property metadatas must be filled.
+
+## Stats
+
+[![NPM](https://nodei.co/npm/gulp-mdvars.png?downloads=true&stars=true)](https://nodei.co/npm/gulp-iconfont/)
+[![NPM](https://nodei.co/npm-dl/gulp-mdvars.png)](https://nodei.co/npm/gulp-iconfont/)
