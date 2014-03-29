@@ -1,5 +1,5 @@
 var gutil = require('gulp-util')
-  , Stream = require('stream')
+  , Stream = require('readable-stream')
   , mdvars = require('mdvars')
 ;
 
@@ -13,6 +13,8 @@ function gulpMdvars(options) {
 
   options.prop = options.prop || 'metas';
 
+  options.varEvent = options.varEvent || 'end';
+
   stream._transform = function(file, unsed, done) {
     // When null just pass through
     if(file.isNull()) {
@@ -21,6 +23,12 @@ function gulpMdvars(options) {
     }
 
     var contents = file.pipe(new mdvars(file, options.prop));
+
+    if('end' !== options.varEvent) {
+      contents.on('varsend', function() {
+        stream.emit(options.varEvent);
+      });
+    }
 
     // Buffers
     if(file.isBuffer()) {
@@ -31,8 +39,11 @@ function gulpMdvars(options) {
         done();
       });
 
-      contents.on('data', function(chunk) {
-        file.contents = Buffer.concat([file.contents, chunk]);
+      contents.once('readable', function() {
+        var chunk;
+        while(chunk = contents.read()) {
+          file.contents = Buffer.concat([file.contents, chunk]);
+        }
       });
 
     // Streams
