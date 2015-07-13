@@ -7,27 +7,28 @@ const PLUGIN_NAME = 'gulp-mdvars';
 function gulpMdvars(options) {
 
   var stream = Stream.Transform({objectMode: true});
+  var filesBuffer = [];
+  var streamFlushCallback = null;
 
   options = options || {};
-
   options.prop = options.prop || 'metadata';
 
-  options.varEvent = options.varEvent || 'end';
-
-  stream._transform = function(file, unsed, done) {
+  stream._transform = function gulpMdvarsTransform(file, unused, done) {
     // When null just pass through
     if(file.isNull()) {
       stream.push(file); done();
       return;
     }
 
-    var contents = file.pipe(new mdvars(file, options.prop));
+    var mdStream = new mdvars(file, options.prop);
 
-    if('end' !== options.varEvent) {
-      contents.on('varsend', function() {
-        stream.emit(options.varEvent);
-      });
-    }
+    filesBuffer.push(file);
+    mdStream.on('varsend', function() {
+      filesBuffer.splice(filesBuffer.indexOf(file), 1);
+      streamFlushCallback && streamFlushCallback();
+    });
+
+    var contents = file.pipe(mdStream);
 
     // Buffers
     if(file.isBuffer()) {
@@ -51,6 +52,16 @@ function gulpMdvars(options) {
       stream.push(file);
       done();
     }
+  };
+
+  stream._flush = function gulpMdvarsFlush(done) {
+    streamFlushCallback = function() {
+      if(!filesBuffer.length) {
+        stream.emit('varsend');
+        done();
+      }
+    };
+    streamFlushCallback();
   };
 
   return stream;

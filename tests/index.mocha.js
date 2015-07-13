@@ -1,5 +1,4 @@
 var fs = require('fs');
-var gulp = require('gulp');
 var gutil = require('gulp-util');
 var streamtest = require('streamtest');
 var mdvars = require('../src/index');
@@ -18,6 +17,7 @@ describe('gulp-mdvars', function() {
         it('should let null files pass through', function(done) {
 
           var stream = mdvars();
+          var varsendEmitted = false;
           stream.pipe(streamtest[version].toObjects(function(err, files) {
             if(err) {
               return done(err);
@@ -27,6 +27,9 @@ describe('gulp-mdvars', function() {
             assert.equal(files[0].contents, null);
             done();
           }));
+          stream.on('varsend', function() {
+            varsendEmitted = true;
+          });
           stream.write(new gutil.File({
             path: 'bibabelula.md',
             contents: null
@@ -42,6 +45,8 @@ describe('gulp-mdvars', function() {
         it('should work with a valid file', function(done) {
 
           var stream = mdvars();
+          var files = [];
+          var varsendEmitted = false;
           stream.pipe(streamtest[version].toObjects(function(err, files) {
             if(err) {
               return done(err);
@@ -49,9 +54,10 @@ describe('gulp-mdvars', function() {
             assert.equal(files.length, 1);
             assert.equal(files[0].path, 'tests/fixtures/simple.meta.md');
             files[0].contents.pipe(streamtest[version].toText(function(err, text) {
-              assert(files[0].metas);
-              assert.equal(files[0].metas.title, 'A markdown file');
-              assert.equal(files[0].metas.description, 'This is a simple markdown file');
+              assert(varsendEmitted);
+              assert(files[0].metadata);
+              assert.equal(files[0].metadata.title, 'A markdown file');
+              assert.equal(files[0].metadata.description, 'This is a simple markdown file');
               assert.equal(
                 text,
                 fs.readFileSync('tests/fixtures/simple.md', 'utf-8')
@@ -59,6 +65,9 @@ describe('gulp-mdvars', function() {
               done();
             }));
           }));
+          stream.on('varsend', function() {
+            varsendEmitted = true;
+          });
           stream.write(new gutil.File({
             path: 'tests/fixtures/simple.meta.md',
             contents: fs.createReadStream('tests/fixtures/simple.meta.md')
@@ -79,15 +88,17 @@ describe('gulp-mdvars', function() {
             }
             assert.equal(files.length, 1);
             assert.equal(files[0].path, 'tests/fixtures/simple.meta.md');
-            assert(files[0].metas);
-            assert.equal(files[0].metas.title, 'A markdown file');
-            assert.equal(files[0].metas.description, 'This is a simple markdown file');
+            assert(files[0].metadata);
+            assert.equal(files[0].metadata.title, 'A markdown file');
+            assert.equal(files[0].metadata.description, 'This is a simple markdown file');
             assert.equal(
               files[0].contents.toString('utf-8'),
               fs.readFileSync('tests/fixtures/simple.md', 'utf-8')
             );
-            done();
           }));
+          stream.on('varsend', function() {
+            done();
+          });
           stream.write(new gutil.File({
             path: 'tests/fixtures/simple.meta.md',
             contents: fs.readFileSync('tests/fixtures/simple.meta.md')
