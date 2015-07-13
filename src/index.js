@@ -10,7 +10,7 @@ function gulpMdvars(options) {
 
   options = options || {};
 
-  options.prop = options.prop || 'metas';
+  options.prop = options.prop || 'metadata';
 
   options.varEvent = options.varEvent || 'end';
 

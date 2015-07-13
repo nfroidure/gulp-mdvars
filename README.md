@@ -21,7 +21,7 @@ var marked = require('gulp-marked');
 gulp.task('mdvars', function() {
   gulp.src(['assets/contents/*.md'])
     .pipe(mdvars({
-      prop: 'metas', // Datas will be set to the file object in the given property
+      prop: 'metadata', // Datas will be set to the file object in the given property
      }))
     .pipe(marked()) // Do whatever you want with the cleaned up datas
     .pipe(gulp.dest('www/'));
@@ -38,7 +38,7 @@ gulp.task('mdvars', function() {
 
 #### options.prop
 Type: `String`
-Default value: `'metas'`
+Default value: `'metadata'`
 
 A string value indicating in wich property metadatas must be filled.
 
