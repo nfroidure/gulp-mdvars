@@ -39,11 +39,10 @@
     "readable-stream": "^2.0.1"
   },
   "devDependencies": {
-    "event-stream": "~3.3.1",
-    "mocha": "~2.2.5",
-    "gulp": "~3.9.0",
-    "mocha-lcov-reporter": "0.0.2",
     "coveralls": "~2.11.2",
-    "istanbul": "~0.3.17"
+    "istanbul": "~0.3.17",
+    "mocha": "~2.2.5",
+    "mocha-lcov-reporter": "0.0.2",
+    "streamtest": "^1.2.1"
   }
 }
