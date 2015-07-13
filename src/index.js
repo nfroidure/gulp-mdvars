@@ -1,14 +1,13 @@
-var gutil = require('gulp-util')
-  , Stream = require('readable-stream')
-  , mdvars = require('mdvars')
-;
+var gutil = require('gulp-util');
+var Stream = require('readable-stream');
+var mdvars = require('mdvars');
 
 const PLUGIN_NAME = 'gulp-mdvars';
 
 function gulpMdvars(options) {
 
   var stream = Stream.Transform({objectMode: true});
-  
+
   options = options || {};
 
   options.prop = options.prop || 'metas';
@@ -39,9 +38,9 @@ function gulpMdvars(options) {
         done();
       });
 
-      contents.once('readable', function() {
+      contents.on('readable', function() {
         var chunk;
-        while(chunk = contents.read()) {
+        while(null !== (chunk = contents.read())) {
           file.contents = Buffer.concat([file.contents, chunk]);
         }
       });

@@ -1,10 +1,9 @@
-var fs = require('fs')
-  , gulp = require('gulp')
-  , gutil = require('gulp-util')
-  , es = require('event-stream')
-  , mdvars = require('../src/index')
-  , assert = require('assert')
-;
+var fs = require('fs');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var es = require('event-stream');
+var mdvars = require('../src/index');
+var assert = require('assert');
 
 
 describe('gulp-mdvars', function() {
@@ -13,8 +12,8 @@ describe('gulp-mdvars', function() {
 
     it('should let null files pass through', function(done) {
 
-      var s = mdvars()
-        , n = 0;
+      var s = mdvars();
+      var n = 0;
       s.pipe(es.through(function(file) {
           assert.equal(file.path,'bibabelula.md');
           assert.equal(file.contents, null);
