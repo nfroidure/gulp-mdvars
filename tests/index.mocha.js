@@ -22,6 +22,7 @@ describe('gulp-mdvars', function() {
             if(err) {
               return done(err);
             }
+            assert(varsendEmitted);
             assert.equal(files.length, 1);
             assert.equal(files[0].path, 'bibabelula.md');
             assert.equal(files[0].contents, null);
